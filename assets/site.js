@@ -1,0 +1,123 @@
+/* Jodi Katzin Therapy — small, dependency-free site script.
+ *
+ * FACTS (source: jodikatzintherapy.com, Nov 2026). Every mention on the pages and in JSON-LD uses these.
+ *   Name:        Jodi Katzin Therapy — Jodi Katzin, Occupational Therapist (COTO, in good standing)
+ *   Offers:      Psychotherapy-based support for women in midlife
+ *   Where:       Virtual, or in person in Vaughan, Ontario (no street address published)
+ *   Email:       jodikatzin@yahoo.com (replies within 1–2 business days)
+ *   Instagram:   @jodikatzintherapy
+ *   Free consult: 15 minutes
+ *   Sessions:    50 minutes, $150, weekly or biweekly; OT receipt for extended health
+ *   Training:    ACT (Psychwire, Russ Harris), IFS Unburdened Eating Spring Intensive (IFS Institute),
+ *                Eating Psychology / Mind Body Eating Coach (Institute for the Psychology of Eating)
+ */
+(function () {
+  document.documentElement.classList.remove('no-js');
+
+  // Optional: paste a form service URL (Formspree, Basin, etc.) to send the consult form without opening an email app.
+  var FORM_ENDPOINT = '';
+  var EMAIL = 'jodikatzin@yahoo.com';
+
+  // header shadow + mobile menu
+  var head = document.querySelector('.site-head');
+  var onScroll = function () { head && head.classList.toggle('scrolled', window.scrollY > 8); };
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+  var mb = document.querySelector('.menu-btn'), nav = document.getElementById('nav');
+  if (mb && nav) {
+    mb.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      mb.setAttribute('aria-expanded', open);
+      mb.textContent = open ? 'Close' : 'Menu';
+    });
+  }
+
+  // reveal on scroll
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    rv.forEach(function (el) { io.observe(el); });
+  } else rv.forEach(function (el) { el.classList.add('in'); });
+
+  // "What are you carrying?" picker on the home page
+  var carry = document.querySelector('.carry');
+  if (carry) {
+    var out = document.querySelector('.carry-out'), msg = out.querySelector('p'), go = out.querySelector('a');
+    var base = go.getAttribute('href');
+    var words = ['', 'one thing', 'two things', 'three things', 'four things', 'five things', 'all six'];
+    var update = function () {
+      var on = [].slice.call(carry.querySelectorAll('[aria-pressed=true]'));
+      var n = on.length;
+      out.dataset.n = n;
+      if (!n) { msg.textContent = 'Tap anything that sounds familiar. Nothing is saved or sent.'; go.setAttribute('href', base); go.lastChild.textContent = ' Book a free consultation'; return; }
+      msg.textContent = n === 1
+        ? 'You named one thing. That is a good place to start a conversation.'
+        : 'You named ' + words[n] + '. That is a lot to carry at once, and you don’t have to carry it alone.';
+      go.setAttribute('href', base + '?topics=' + on.map(function (b) { return b.dataset.topic; }).join(','));
+      go.lastChild.textContent = ' Bring these to a free consultation';
+    };
+    carry.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true');
+      update();
+    });
+    update();
+  }
+
+  // IFS parts diagram on My Approach
+  var parts = document.querySelector('.parts');
+  if (parts) {
+    var cap = document.querySelector('.parts-cap');
+    var btns = document.querySelectorAll('.parts-legend button');
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var k = b.dataset.part, was = b.getAttribute('aria-pressed') === 'true';
+        btns.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        parts.querySelectorAll('.p').forEach(function (p) { p.style.opacity = ''; });
+        if (was) { cap.textContent = cap.dataset.default; return; }
+        b.setAttribute('aria-pressed', 'true');
+        parts.querySelectorAll('.p').forEach(function (p) { if (p.dataset.part !== k) p.style.opacity = '.25'; });
+        cap.textContent = b.dataset.cap;
+      });
+    });
+  }
+
+  // Consultation request form on Connect
+  var form = document.querySelector('form.ask');
+  if (form) {
+    var q = new URLSearchParams(location.search).get('topics');
+    if (q) q.split(',').forEach(function (t) {
+      var box = form.querySelector('input[name=topic][value="' + t.replace(/"/g, '') + '"]'); if (box) box.checked = true;
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = new FormData(form);
+      var topics = f.getAll('topic').map(function (v) {
+        var l = form.querySelector('input[name=topic][value="' + v + '"]'); return l ? l.dataset.label : v;
+      });
+      var lines = [
+        'Hi Jodi,', '',
+        'I would like to book a free 15-minute consultation.', '',
+        'Name: ' + (f.get('name') || ''),
+        'Email: ' + (f.get('email') || ''),
+        f.get('phone') ? 'Phone: ' + f.get('phone') : null,
+        'Prefer: ' + (f.get('format') || 'Not sure yet'),
+        topics.length ? 'What I’m navigating: ' + topics.join('; ') : null,
+        f.get('times') ? 'Good times for a call: ' + f.get('times') : null,
+        f.get('message') ? '\n' + f.get('message') : null
+      ].filter(function (l) { return l !== null; }).join('\n');
+      var done = form.querySelector('.form-done');
+      if (FORM_ENDPOINT) {
+        fetch(FORM_ENDPOINT, { method: 'POST', headers: { Accept: 'application/json' }, body: f })
+          .then(function (r) { if (!r.ok) throw 0; done.textContent = 'Thank you. Jodi will get back to you within 1–2 business days.'; done.classList.add('show'); form.reset(); })
+          .catch(function () { location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(lines); });
+        return;
+      }
+      location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(lines);
+      done.classList.add('show');
+    });
+  }
+
+  var y = document.getElementById('yr'); if (y) y.textContent = new Date().getFullYear();
+})();
