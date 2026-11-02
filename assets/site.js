@@ -16,6 +16,9 @@
 
   // Optional: paste a form service URL (Formspree, Basin, etc.) to send the consult form without opening an email app.
   var FORM_ENDPOINT = '';
+  // Instagram: create a free JSON feed at behold.so connected to @jodikatzintherapy and paste its feed ID here.
+  // Until then the home page shows four saved posts that link to Instagram.
+  var BEHOLD_FEED_ID = '';
   var EMAIL = 'jodikatzin@yahoo.com';
 
   // header shadow + mobile menu
@@ -124,6 +127,34 @@
       location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(lines);
       done.classList.add('show');
     });
+  }
+
+  // Instagram: swap the saved posts for her latest four once a Behold feed is connected
+  var ig = document.querySelector('[data-ig]');
+  if (ig && BEHOLD_FEED_ID) {
+    fetch('https://feeds.behold.so/' + BEHOLD_FEED_ID, { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw r.status; return r.json(); })
+      .then(function (d) {
+        var posts = (Array.isArray(d) ? d : (d && d.posts) || []).slice(0, 4);
+        if (!posts.length) return;
+        ig.textContent = '';
+        posts.forEach(function (p) {
+          var s = p.sizes || {};
+          var src = (s.medium && s.medium.mediaUrl) || (s.small && s.small.mediaUrl) || (p.mediaType === 'VIDEO' ? p.thumbnailUrl : p.mediaUrl);
+          if (!src) return;
+          var cap = (p.prunedCaption || p.caption || '').trim();
+          var a = document.createElement('a');
+          a.className = 'ig-tile'; a.href = p.permalink || 'https://www.instagram.com/jodikatzintherapy/';
+          a.target = '_blank'; a.rel = 'noopener';
+          a.setAttribute('aria-label', (cap ? 'Instagram post: ' + cap.slice(0, 80) : 'Instagram post') + ', opens Instagram');
+          var img = document.createElement('img');
+          img.src = src; img.alt = ''; img.loading = 'lazy'; img.width = 480; img.height = 600;
+          a.appendChild(img);
+          if (p.mediaType === 'VIDEO') a.insertAdjacentHTML('beforeend', '<svg class="ig-kind" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>');
+          ig.appendChild(a);
+        });
+      })
+      .catch(function () { /* keep the saved posts */ });
   }
 
   var y = document.getElementById('yr'); if (y) y.textContent = new Date().getFullYear();

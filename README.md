@@ -17,6 +17,9 @@ All text, contact details, rates and photos come from the current site. Page add
 - Search and AI-answer groundwork: unique titles and descriptions, structured data for the practice, Jodi,
   her credentials, services and prices, social preview image, sitemap, robots.txt, 404 page.
 - 9-8-8 crisis line note in the footer (standard on therapy sites).
+- Instagram section on the home page. It shows four saved posts for now; to make it live, create a free JSON feed
+  at behold.so connected to @jodikatzintherapy and paste the feed ID into `BEHOLD_FEED_ID` in `assets/site.js`.
+  It then shows her latest four posts automatically.
 
 ## Questions for Jodi before launch
 1. **In-person location.** The site only says "Vaughan, Ontario". Share an address or a neighbourhood/intersection?
