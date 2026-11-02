@@ -45,15 +45,22 @@
   if (carry) {
     var out = document.querySelector('.carry-out'), msg = out.querySelector('p'), go = out.querySelector('a');
     var base = go.getAttribute('href');
-    var words = ['', 'one thing', 'two things', 'three things', 'four things', 'five things', 'all six'];
+    // A different note for each count, so the message grows with what the visitor names
+    var notes = [
+      '',
+      'You named one thing. That is a good place to start a conversation.',
+      'Two things at once can feel like a lot. You don’t have to sort them out on your own.',
+      'Three things pulling at you at once. No wonder it can feel like the rug is shifting.',
+      'Four things is a lot to carry. We can start wherever feels most pressing.',
+      'Five things at once. It makes sense if you are feeling stretched thin.',
+      'All six. Midlife really is a lot all at once, and you don’t have to carry it alone.'
+    ];
     var update = function () {
       var on = [].slice.call(carry.querySelectorAll('[aria-pressed=true]'));
       var n = on.length;
       out.dataset.n = n;
       if (!n) { msg.textContent = 'Tap anything that sounds familiar. Nothing is saved or sent.'; go.setAttribute('href', base); go.lastChild.textContent = ' Book a free consultation'; return; }
-      msg.textContent = n === 1
-        ? 'You named one thing. That is a good place to start a conversation.'
-        : 'You named ' + words[n] + '. That is a lot to carry at once, and you don’t have to carry it alone.';
+      msg.textContent = notes[n];
       go.setAttribute('href', base + '?topics=' + on.map(function (b) { return b.dataset.topic; }).join(','));
       go.lastChild.textContent = ' Bring these to a free consultation';
     };
