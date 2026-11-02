@@ -150,7 +150,7 @@
           var img = document.createElement('img');
           img.src = src; img.alt = ''; img.loading = 'lazy'; img.width = 480; img.height = 600;
           a.appendChild(img);
-          if (p.mediaType === 'VIDEO') a.insertAdjacentHTML('beforeend', '<svg class="ig-kind" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>');
+          if (p.mediaType === 'VIDEO') a.insertAdjacentHTML('beforeend', '<svg class="ig-kind" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>');
           ig.appendChild(a);
         });
       })

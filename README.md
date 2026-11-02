@@ -41,4 +41,6 @@ All text, contact details, rates and photos come from the current site. Page add
   add the website to her Instagram bio, and make sure her listings (Psychology Today etc., if any) use the same name,
   email and wording.
 
+When changing `assets/site.css` or `assets/site.js`, bump the `?v=` tag on their links in every page so visitors never get a stale copy.
+
 Source files for the social image and app icon are in `_src/` (not published).
