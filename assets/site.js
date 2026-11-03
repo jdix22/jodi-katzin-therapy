@@ -17,8 +17,8 @@
   // Optional: paste a form service URL (Formspree, Basin, etc.) to send the consult form without opening an email app.
   var FORM_ENDPOINT = '';
   // Instagram: create a free JSON feed at behold.so connected to @jodikatzintherapy and paste its feed ID here.
-  // Until then the home page shows four saved posts that link to Instagram.
-  var BEHOLD_FEED_ID = '';
+  // The four saved posts in the page show only if the feed can't be reached.
+  var BEHOLD_FEED_ID = 'YEK180S54YRMfsbW0GL6';
   var EMAIL = 'jodikatzin@yahoo.com';
 
   // header shadow + mobile menu
