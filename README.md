@@ -16,7 +16,7 @@ All text, contact details, rates and photos come from the current site. Page add
 - Rates and FAQ answered up front (cost, benefits receipts, virtual vs in person, frequency, reply time).
 - Search and AI-answer groundwork: unique titles and descriptions, structured data for the practice, Jodi,
   her credentials, services and prices, social preview image, sitemap, robots.txt, 404 page.
-- 9-8-8 crisis line note in the footer (standard on therapy sites).
+- No crisis-line note: Jodi asked to remove it (2026-11-03).
 - Instagram section on the home page. It shows four saved posts for now; to make it live, create a free JSON feed
   at behold.so connected to @jodikatzintherapy and paste the feed ID into `BEHOLD_FEED_ID` in `assets/site.js`.
   It then shows her latest four posts automatically.
@@ -28,7 +28,7 @@ All text, contact details, rates and photos come from the current site. Page add
 4. **Booking.** Requests go by email today. Would she like online booking (Jane, Calendly, Owl Practice)?
 5. **Wording to approve.** The short captions on the IFS diagram ("may be standing guard…", "may be asking for rest…"),
    the "25 years as an Occupational Therapist" badge and the section headlines were written for the redesign.
-6. **Crisis note.** OK to keep the 9-8-8 line in the footer?
+6. **Crisis note.** Removed at Jodi's request (2026-11-03).
 7. **Title.** The site describes her as an "Occupational Therapist offering Psychotherapy-based support", never
    "psychotherapist" (a protected title in Ontario). Confirm this matches how she wants to be described.
 
