@@ -53,9 +53,9 @@
       '',
       'You named one thing. That is a good place to start a conversation.',
       'Two things at once can feel like a lot. You don’t have to sort them out on your own.',
-      'Three things pulling at you at once. No wonder it can feel like the rug is shifting.',
+      'Three things pulling at you at once. No wonder it feels like everything is shifting beneath your feet.',
       'Four things is a lot to carry. We can start wherever feels most pressing.',
-      'Five things at once. It makes sense if you are feeling stretched thin.',
+      'Five things at once. It makes sense that you are feeling stretched thin.',
       'All six. Midlife really is a lot all at once, and you don’t have to carry it alone.'
     ];
     var update = function () {
@@ -120,7 +120,7 @@
       var done = form.querySelector('.form-done');
       if (FORM_ENDPOINT) {
         fetch(FORM_ENDPOINT, { method: 'POST', headers: { Accept: 'application/json' }, body: f })
-          .then(function (r) { if (!r.ok) throw 0; done.textContent = 'Thank you. Jodi will get back to you within 1–2 business days.'; done.classList.add('show'); form.reset(); })
+          .then(function (r) { if (!r.ok) throw 0; done.textContent = 'Thank you. I will get back to you within 1–2 business days.'; done.classList.add('show'); form.reset(); })
           .catch(function () { location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Free consultation request') + '&body=' + encodeURIComponent(lines); });
         return;
       }
