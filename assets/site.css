@@ -261,7 +261,7 @@ form.ask{background:var(--card);border:1px solid var(--line);border-radius:var(-
 fieldset.field{border:0;padding:0;margin:0 0 18px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips label{flex:0 0 auto;white-space:nowrap;font-weight:500;font-size:.92rem;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:99px;padding:8px 14px;cursor:pointer;background:var(--paper);transition:.2s}
-.chips input{accent-color:var(--rose);margin:0}
+.field .chips input{accent-color:var(--rose);margin:0;flex:0 0 auto;width:18px;height:18px;padding:0;border:0;border-radius:4px;background:none}
 .chips label:has(input:checked){background:var(--blush);border-color:var(--rose-2)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media (max-width:560px){.two{grid-template-columns:1fr}}
