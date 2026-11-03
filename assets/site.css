@@ -36,7 +36,7 @@ em,.it{font-style:italic;color:var(--rose)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
 .brand svg{width:34px;height:34px;flex:none}
 .brand b{font:500 1.28rem/1 var(--serif);letter-spacing:-.01em;display:block}
-.brand small{display:block;font:italic 400 .98rem/1 var(--serif);text-transform:lowercase;color:var(--rose);margin-top:3px}
+.brand small{display:block;font:italic 400 .98rem/1 var(--serif);color:var(--rose);margin-top:3px}
 .nav{display:flex;align-items:center;gap:6px}
 .nav a{text-decoration:none;font-weight:500;font-size:.95rem;padding:9px 13px;border-radius:99px;color:var(--ink-soft);transition:background .2s,color .2s}
 .nav a:hover{background:var(--paper-2);color:var(--ink)}
