@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jdix22.github.io/jodi-katzin-therapy/sitemap.xml
+Sitemap: https://jodikatzintherapy.ca/sitemap.xml

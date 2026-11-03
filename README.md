@@ -1,7 +1,7 @@
 # Jodi Katzin Therapy — website redesign (prototype)
 
-Prototype redesign of jodikatzintherapy.com (currently Squarespace) for Jodi Katzin, Occupational Therapist.
-Live preview: https://jdix22.github.io/jodi-katzin-therapy/
+Website for Jodi Katzin, Occupational Therapist. Live at https://jodikatzintherapy.ca/ (Cloudflare Worker "jodi-katzin-therapy"; deploy with `wrangler deploy` from this folder).
+GitHub Pages copy (canonical points at the live domain): https://jdix22.github.io/jodi-katzin-therapy/
 
 All text, contact details, rates and photos come from the current site. Page addresses match the old ones
 (`/about`, `/my-approach`, `/howtoworktogether`, `/connect`), so existing links and Google rankings carry over.
@@ -32,11 +32,11 @@ All text, contact details, rates and photos come from the current site. Page add
 7. **Title.** The site describes her as an "Occupational Therapist offering Psychotherapy-based support", never
    "psychotherapist" (a protected title in Ontario). Confirm this matches how she wants to be described.
 
-## Going live (after Jodi approves)
-- Remove `<meta name="robots" content="noindex">` from every page.
-- Replace `https://jdix22.github.io/jodi-katzin-therapy/` with `https://www.jodikatzintherapy.com/` in canonicals,
-  social tags, JSON-LD, `sitemap.xml` and `robots.txt`; change `/jodi-katzin-therapy/` paths in `404.html` to `/`.
-- Point the domain away from Squarespace, then submit the sitemap in Google Search Console and Bing Webmaster Tools.
+## Launch (done 2026-11-02 on jodikatzintherapy.ca)
+- Done: noindex removed (kept on 404), URLs switched to https://jodikatzintherapy.ca/, www redirects to the main address.
+- Still to do: forward the old jodikatzintherapy.com (Squarespace) to jodikatzintherapy.ca, keeping its paths,
+  so old links and Google rankings carry over.
+- Submit https://jodikatzintherapy.ca/sitemap.xml in Google Search Console and Bing Webmaster Tools.
 - Jodi's own to-dos: claim a Google Business Profile (as a service-area business if she'd rather not show an address),
   add the website to her Instagram bio, and make sure her listings (Psychology Today etc., if any) use the same name,
   email and wording.

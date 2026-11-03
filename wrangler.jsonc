@@ -1,0 +1,17 @@
+{
+  "name": "jodi-katzin-therapy",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-02",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": true
+  },
+  "routes": [
+    { "pattern": "jodikatzintherapy.ca", "custom_domain": true },
+    { "pattern": "www.jodikatzintherapy.ca", "custom_domain": true }
+  ],
+  "workers_dev": false,
+  "preview_urls": false
+}
