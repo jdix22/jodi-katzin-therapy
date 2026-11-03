@@ -1,4 +1,4 @@
-# Jodi Katzin Therapy — website redesign (prototype)
+# Jodi Katzin Therapy — website
 
 Website for Jodi Katzin, Occupational Therapist. Live at https://jodikatzintherapy.ca/ (Cloudflare Worker "jodi-katzin-therapy"; deploy with `wrangler deploy` from this folder).
 GitHub Pages copy (canonical points at the live domain): https://jdix22.github.io/jodi-katzin-therapy/
